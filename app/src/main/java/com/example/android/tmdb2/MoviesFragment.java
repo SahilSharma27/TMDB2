@@ -36,6 +36,7 @@ public class MoviesFragment extends Fragment implements View.OnClickListener {
     ProgressBar pb;
     Intent intent1,intent2,intent3;
     TextView uSeeAll,pSeeAll,tSeeAll;
+    Long uTotalPages,pTotalPages,tTotalPages;
 
 
     public MoviesFragment() {
@@ -53,9 +54,9 @@ public class MoviesFragment extends Fragment implements View.OnClickListener {
         recyclerView3=output.findViewById(R.id.TopRecycleView);
         pb=output.findViewById(R.id.pb);
         pSeeAll=output.findViewById(R.id.popularseeAll);
-        uSeeAll=output.findViewById(R.id.upcomingSeeAll);
+       // uSeeAll=output.findViewById(R.id.upcomingSeeAll);
         tSeeAll=output.findViewById(R.id.topRatedseeAll);
-        uSeeAll.setOnClickListener(this);
+       // uSeeAll.setOnClickListener(this);
         pSeeAll.setOnClickListener(this);
         tSeeAll.setOnClickListener(this);
 
@@ -149,9 +150,11 @@ public class MoviesFragment extends Fragment implements View.OnClickListener {
                 @Override
                 public void onResponse(Call<Movie> call, Response<Movie> response) {
                     uMovie=response.body();
+                    uTotalPages=uMovie.getTotalPages();
                     for(int i=0;i<uMovie.getResults().size();i++){
                         Poster newPost=new Poster(uMovie.getResults().get(i).getOriginalTitle(),uMovie.getResults().get(i).getBackdropPath());
                         upcomingMoviesPoster.add(i,newPost);
+
                     }
                     adapter1.notifyDataSetChanged();
 
@@ -171,8 +174,9 @@ public class MoviesFragment extends Fragment implements View.OnClickListener {
                 @Override
                 public void onResponse(Call<Movie> call, Response<Movie> response) {
                     pMovie=response.body();
+                    pTotalPages=pMovie.getTotalPages();
                     for(int i=0;i<pMovie.getResults().size();i++){
-                        Poster newPost=new Poster(pMovie.getResults().get(i).getOriginalTitle(),pMovie.getResults().get(i).getBackdropPath());
+                        Poster newPost=new Poster(pMovie.getResults().get(i).getOriginalTitle(),pMovie.getResults().get(i).getPosterPath());
                         PopularMoviesPoster.add(i,newPost);
                     }
                     adapter2.notifyDataSetChanged();
@@ -191,8 +195,9 @@ public class MoviesFragment extends Fragment implements View.OnClickListener {
                 @Override
                 public void onResponse(Call<Movie> call, Response<Movie> response) {
                     tMovie=response.body();
+                    tTotalPages=tMovie.getTotalPages();
                     for(int i=0;i<tMovie.getResults().size();i++){
-                        Poster newPost=new Poster(tMovie.getResults().get(i).getOriginalTitle(),tMovie.getResults().get(i).getBackdropPath());
+                        Poster newPost=new Poster(tMovie.getResults().get(i).getOriginalTitle(),tMovie.getResults().get(i).getPosterPath());
                         topMoviesPoster.add(i,newPost);
                     }
                     adapter3.notifyDataSetChanged();
@@ -227,18 +232,22 @@ public class MoviesFragment extends Fragment implements View.OnClickListener {
 
         Toast.makeText(getContext(),"Clicked",Toast.LENGTH_LONG).show();
         int id=v.getId();
+        Intent intent=new Intent(getContext(),SeeAllActivity.class);
         String type=null;
         if(id==R.id.popularseeAll){
             type="popular";
+            intent.putExtra("totalPages",pTotalPages);
         }
-        else if(id==R.id.upcomingSeeAll){
-            type="upcoming";
+//        else if(id==R.id.upcomingSeeAll){
+//            type="upcoming";
+//            intent.putExtra("totalPages",uTotalPages);
+//
+//        }
+           else if(id==R.id.topRatedseeAll){
+            type="top_rated";
+            intent.putExtra("totalPages",tTotalPages);
+        }
 
-        }
-        else if(id==R.id.topRatedseeAll){
-            type="topRated";
-        }
-        Intent intent=new Intent(getContext(),SeeAllActivity.class);
         intent.putExtra("type",type);
         startActivity(intent);
 

@@ -7,14 +7,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 public class ItemViewHolder2 extends RecyclerView.ViewHolder {
-    TextView title;
+   // TextView title;
     ImageView imageView;
     View itemView;
 
     public ItemViewHolder2(@NonNull View itemView) {
         super(itemView);
         this.itemView = itemView;
-        title = itemView.findViewById(R.id.movietitle);
+      //  title = itemView.findViewById(R.id.movietitle);
         imageView = itemView.findViewById(R.id.imageview);
     }
 }

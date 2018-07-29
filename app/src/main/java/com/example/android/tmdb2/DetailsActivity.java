@@ -174,7 +174,7 @@ public class DetailsActivity extends AppCompatActivity {
                 public void onResponse(Call<Movie> call, Response<Movie> response) {
                     sMovie=response.body();
                     for (int i = 0; i < sMovie.getResults().size(); i++) {
-                        Poster poster=new Poster(sMovie.getResults().get(i).getOriginalTitle(),sMovie.getResults().get(i).getBackdropPath());
+                        Poster poster=new Poster(sMovie.getResults().get(i).getOriginalTitle(),sMovie.getResults().get(i).getPosterPath());
                         similarMovie.add(poster);
 
                     }

@@ -15,7 +15,7 @@ public class CustomAdapterType2 extends RecyclerView.Adapter<ItemViewHolder2> {
     ArrayList<Poster> Movies;
     Context context;
     MovieTVClickListener listener;
-    String baseurl="http://image.tmdb.org/t/p/w780";
+    String baseurl="http://image.tmdb.org/t/p/w342";
     public CustomAdapterType2(Context context, ArrayList<Poster>Movies,MovieTVClickListener movieClickListener){
         this.listener=movieClickListener;
         this.context=context;
@@ -33,7 +33,7 @@ public class CustomAdapterType2 extends RecyclerView.Adapter<ItemViewHolder2> {
     @Override
     public void onBindViewHolder(@NonNull final ItemViewHolder2 holder, int position) {
         Poster postr=Movies.get(position);
-        holder.title.setText(postr.getMovietitle());
+       // holder.title.setText(postr.getMovietitle());
         Picasso.get().load(baseurl+postr.getThumbNailUrl()).into(holder.imageView);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
