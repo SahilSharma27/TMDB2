@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="#000000"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".DetailsActivity"
     tools:showIn="@layout/activity_details">
@@ -24,6 +25,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/date"
+                android:textColor="#ffffff"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="50dp"
                 />
@@ -35,25 +37,40 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_margin="16dp"
                 android:src="@drawable/ic_star_border_black_24dp"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="#ffffff"
+                android:textSize="20sp"
+                android:text="rating"
+                android:layout_marginBottom="16dp"
+                android:layout_marginTop="16dp"
                 android:id="@+id/rating" />
         </LinearLayout>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Overview"
+            android:layout_marginStart="16dp"
+            android:textColor="#ffffff"
             />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:textColor="#ffffff"
             android:id="@+id/overviewId"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Cast"/>
+            android:text="Cast"
+            android:textSize="25sp"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginBottom="4dp"
+            android:textColor="#ffffff"/>
         <android.support.v7.widget.RecyclerView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -62,6 +79,11 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="#ffffff"
+            android:layout_marginStart="16dp"
+            android:layout_marginBottom="4dp"
+            android:layout_marginTop="16dp"
+            android:textSize="25sp"
             android:text="Similar Movies"/>
         <android.support.v7.widget.RecyclerView
             android:layout_width="wrap_content"

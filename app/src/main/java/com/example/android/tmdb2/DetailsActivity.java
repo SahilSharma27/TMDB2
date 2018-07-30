@@ -40,6 +40,7 @@ public class DetailsActivity extends AppCompatActivity {
     Movie sMovie;
     CustomAdapterType2 adapter2;
     CastObject obj;
+    String movieOrTv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,7 +76,7 @@ public class DetailsActivity extends AppCompatActivity {
         });
         fab1.setImageResource(R.drawable.ic_play_arrow_black_24dp);
 
-        Intent intent = getIntent();
+        final Intent intent = getIntent();
         Bundle b = intent.getExtras();
         movieId = b.getLong("id");
         String title = b.getString("title");
@@ -84,6 +85,7 @@ public class DetailsActivity extends AppCompatActivity {
         String overview = b.getString("overview");
         Double rating = b.getDouble("rating");
         String date = b.getString("release_date");
+        movieOrTv=b.getString("type");
         getSupportActionBar().setTitle(title);
         ratingtextView.setText(rating + "/10");
         OverView.setText(overview);
@@ -97,7 +99,10 @@ public class DetailsActivity extends AppCompatActivity {
         adapter = new CastAdapter(cast, this, new CastClickListener() {
             @Override
             public void onCastClicked(View view, int position) {
-                //todo
+                Toast.makeText(getApplicationContext(),cast.get(position).getId()+"",Toast.LENGTH_LONG).show();
+                Intent intent1=new Intent(getApplicationContext(),CastDescriptionActivity.class);
+                intent1.putExtra("castId",obj.getCast().get(position).getId());
+                startActivity(intent1);
             }
         });
         castRecyclerView.setAdapter(adapter);
@@ -109,6 +114,7 @@ public class DetailsActivity extends AppCompatActivity {
         adapter2 = new CustomAdapterType2(this, similarMovie, new MovieTVClickListener() {
             @Override
             public void onMovieClicked(View view, int position) {
+                //todo
 
             }
         });
@@ -120,7 +126,7 @@ public class DetailsActivity extends AppCompatActivity {
     }
 
     public void openTrailer() {
-        Call<Trailer> call = ApiClient.getMovieTVServices().getMovieTrailer(movieId);
+        Call<Trailer> call = ApiClient.getMovieTVServices().getMovieTrailer(movieOrTv,movieId);
         call.enqueue(new Callback<Trailer>() {
             @Override
             public void onResponse(Call<Trailer> call, Response<Trailer> response) {
@@ -151,7 +157,7 @@ public class DetailsActivity extends AppCompatActivity {
 
     public void fetchData(int code) {
         if (code == 0) {
-            Call<CastObject> call = ApiClient.getMovieTVServices().getCredits(movieId);
+            Call<CastObject> call = ApiClient.getMovieTVServices().getCredits(movieOrTv,movieId);
             call.enqueue(new Callback<CastObject>() {
                 @Override
                 public void onResponse(Call<CastObject> call, Response<CastObject> response) {
@@ -168,7 +174,7 @@ public class DetailsActivity extends AppCompatActivity {
                 }
             });
         } else if (code == 1) {
-            Call <Movie> call=ApiClient.getMovieTVServices().getSimilarMovies(movieId);
+            Call <Movie> call=ApiClient.getMovieTVServices().getSimilarMovies(movieOrTv,movieId);
             call.enqueue(new Callback<Movie>() {
                 @Override
                 public void onResponse(Call<Movie> call, Response<Movie> response) {

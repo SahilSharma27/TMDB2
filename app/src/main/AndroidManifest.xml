@@ -25,7 +25,11 @@
             android:name=".DetailsActivity"
             android:label="@string/title_activity_details"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".SeeAllActivity"></activity>
+        <activity android:name=".SeeAllActivity" />
+        <activity
+            android:name=".CastDescriptionActivity"
+            android:label="@string/title_activity_cast_description"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

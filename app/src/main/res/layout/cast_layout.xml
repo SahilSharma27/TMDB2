@@ -9,7 +9,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="4dp"
-        card_view:cardCornerRadius="10dp"
+        android:backgroundTint="#000000"
         >
 
 
@@ -30,6 +30,7 @@
                 android:width="0dp"
                 android:layout_weight="1"
                 android:maxLines="3"
+                android:textColor="#ffffff"
                 android:layout_height="wrap_content"
                 android:text="Title"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Small" />

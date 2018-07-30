@@ -6,7 +6,9 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.LinearSnapHelper;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SnapHelper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -74,6 +76,7 @@ public class MoviesFragment extends Fragment implements View.OnClickListener {
                 bundle.putDouble("rating",clickedMov.getVoteAverage());
                 bundle.putString("poster",clickedMov.getPosterPath());
                 bundle.putString("release_date",clickedMov.getReleaseDate());
+                bundle.putString("type","movie");
                 intent1=new Intent(getActivity(),DetailsActivity.class);
                 intent1.putExtras(bundle);
                 startActivity(intent1);
@@ -82,6 +85,8 @@ public class MoviesFragment extends Fragment implements View.OnClickListener {
         recyclerView1.setAdapter(adapter1);
 
         recyclerView1.setItemAnimator(new DefaultItemAnimator());
+        SnapHelper snapHelper=new LinearSnapHelper();
+        snapHelper.attachToRecyclerView(recyclerView1);
         LinearLayoutManager UlayoutManager=new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
         recyclerView1.setLayoutManager(UlayoutManager);
         fetchData(0);
@@ -100,6 +105,7 @@ public class MoviesFragment extends Fragment implements View.OnClickListener {
                 bundle.putDouble("rating",clickedMov.getVoteAverage());
                 bundle.putString("poster",clickedMov.getPosterPath());
                 bundle.putString("release_date",clickedMov.getReleaseDate());
+                bundle.putString("type","movie");
                 intent2=new Intent(getActivity(),DetailsActivity.class);
                 intent2.putExtras(bundle);
                 startActivity(intent2);
@@ -124,6 +130,7 @@ public class MoviesFragment extends Fragment implements View.OnClickListener {
                 bundle.putDouble("rating",clickedMov.getVoteAverage());
                 bundle.putString("poster",clickedMov.getPosterPath());
                 bundle.putString("release_date",clickedMov.getReleaseDate());
+                bundle.putString("type","movie");
                 intent3=new Intent(getActivity(),DetailsActivity.class);
                 intent3.putExtras(bundle);
                 startActivity(intent3);
@@ -247,7 +254,7 @@ public class MoviesFragment extends Fragment implements View.OnClickListener {
             type="top_rated";
             intent.putExtra("totalPages",tTotalPages);
         }
-
+        intent.putExtra("MovieTV","movie");
         intent.putExtra("type",type);
         startActivity(intent);
 

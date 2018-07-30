@@ -32,10 +32,16 @@ public class CastAdapter extends RecyclerView.Adapter<castViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(@NonNull castViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final castViewHolder holder, int position) {
         Cast clickedCast=Cast.get(position);
         holder.title.setText(clickedCast.getName()+ " / " + clickedCast.getCharacter());
         Picasso.get().load(baseurl+clickedCast.getProfilePath()).into(holder.imageView);
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listener.onCastClicked(v,holder.getAdapterPosition());
+            }
+        });
 
     }
 
