@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-public class Result {
+public class MovieResult {
     @SerializedName("adult")
     private Boolean mAdult;
     @SerializedName("backdrop_path")

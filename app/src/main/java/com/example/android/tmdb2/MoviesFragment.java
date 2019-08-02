@@ -12,7 +12,6 @@ import android.support.v7.widget.SnapHelper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -67,7 +66,7 @@ public class MoviesFragment extends Fragment implements View.OnClickListener {
         adapter1=new CustomAdapterType1(getContext(), upcomingMoviesPoster, new MovieTVClickListener() {
             @Override
             public void onMovieClicked(View view, int position) {
-                Result clickedMov=uMovie.getResults().get(position);
+                MovieResult clickedMov=uMovie.getResults().get(position);
                 Bundle bundle=new Bundle();
                 bundle.putLong("id",clickedMov.getId());
                 bundle.putString("title",clickedMov.getOriginalTitle());
@@ -96,7 +95,7 @@ public class MoviesFragment extends Fragment implements View.OnClickListener {
         adapter2=new CustomAdapterType2(getContext(), PopularMoviesPoster, new MovieTVClickListener() {
             @Override
             public void onMovieClicked(View view, int position) {
-                Result clickedMov=pMovie.getResults().get(position);
+                MovieResult clickedMov=pMovie.getResults().get(position);
                 Bundle bundle=new Bundle();
                 bundle.putLong("id",clickedMov.getId());
                 bundle.putString("title",clickedMov.getOriginalTitle());
@@ -121,7 +120,7 @@ public class MoviesFragment extends Fragment implements View.OnClickListener {
         adapter3=new CustomAdapterType2(getContext(), topMoviesPoster, new MovieTVClickListener() {
             @Override
             public void onMovieClicked(View view, int position) {
-                Result clickedMov=tMovie.getResults().get(position);
+                MovieResult clickedMov=tMovie.getResults().get(position);
                 Bundle bundle=new Bundle();
                 bundle.putLong("id",clickedMov.getId());
                 bundle.putString("title",clickedMov.getOriginalTitle());

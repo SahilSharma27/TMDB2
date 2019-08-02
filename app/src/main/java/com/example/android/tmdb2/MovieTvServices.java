@@ -30,4 +30,10 @@ public interface MovieTvServices {
     Call<Person>getPersonDetails(@Path("personId") long id);
     @GET("{movieTV}/{type}?api_key=2f532ba110a3df2d734ee5d96abb504b&language=en-US")
     Call<TV>getALLTv(@Path("movieTV")String mOrTv,@Path("type") String type,@Query("page") long pg);
+    @GET("search/multi?api_key=2f532ba110a3df2d734ee5d96abb504b&language=en-US")
+    Call<Search>getSearch(@Query("query") String query,@Query("page") int pg,@Query("include_adult") boolean val);
+    @GET("{movieTV}/{movie_id}/reviews?api_key=2f532ba110a3df2d734ee5d96abb504b&language=en-US&page=1")
+    Call<Reviews>getReviews(@Path("movieTV")String mOrTv,@Path("movie_id") int id);
+    @GET("movie/{movie_id}?api_key=2f532ba110a3df2d734ee5d96abb504b&language=en-US")
+    Call<MovieResult>getFavMovie(@Path("movie_id") long id);
 }

@@ -29,7 +29,10 @@
         <activity
             android:name=".CastDescriptionActivity"
             android:label="@string/title_activity_cast_description"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".SearchResultActivity" />
+        <activity android:name=".FavoritesActivity" />
+        <activity android:name=".CastDescriptionActivity2"></activity>
     </application>
 
 </manifest>

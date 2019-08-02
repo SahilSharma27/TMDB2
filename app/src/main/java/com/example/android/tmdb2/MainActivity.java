@@ -1,5 +1,7 @@
 package com.example.android.tmdb2;
 
+import android.arch.persistence.room.Database;
+import android.arch.persistence.room.Room;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -7,6 +9,7 @@ import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.SearchView;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -23,11 +26,14 @@ public class MainActivity extends AppCompatActivity
     ViewPager viewPager;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -76,24 +82,43 @@ public class MainActivity extends AppCompatActivity
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
+       // return true;
+        SearchView searchView=(SearchView)menu.findItem(R.id.search).getActionView();
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                Log.d("MySearch",query);
+                Intent intent=new Intent(getApplicationContext(),SearchResultActivity.class);
+                intent.putExtra("Query",query);
+                startActivity(intent);
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                Log.d("MynewText",newText);
+                return true;
+            }
+        });
+
         return true;
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.search) {
-
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        // Handle action bar item clicks here. The action bar will
+//        // automatically handle clicks on the Home/Up button, so long
+//        // as you specify a parent activity in AndroidManifest.xml.
+//        int id = item.getItemId();
+//
+//        //noinspection SimplifiableIfStatement
+//        if (id == R.id.search) {
+//
+//            return true;
+//        }
+//
+//        return super.onOptionsItemSelected(item);
+//    }
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
@@ -101,20 +126,22 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.home) {
+//        if (id == R.id.home) {
+//            tabLayout.setScrollPosition(0,0f,true);
+//            viewPager.setCurrentItem(0);
+            // Handle the camera action
+        //}
+         if (id == R.id.movies) {
             tabLayout.setScrollPosition(0,0f,true);
             viewPager.setCurrentItem(0);
-            // Handle the camera action
-        } else if (id == R.id.movies) {
+
+        } else if (id == R.id.tvShows) {
             tabLayout.setScrollPosition(1,0f,true);
             viewPager.setCurrentItem(1);
 
-        } else if (id == R.id.tvShows) {
-            tabLayout.setScrollPosition(2,0f,true);
-            viewPager.setCurrentItem(2);
-
         } else if (id == R.id.favourites) {
-            //todo
+            Intent intent=new Intent(this,FavoritesActivity.class);
+            startActivity(intent);
 
         } else if (id == R.id.nav_share) {
 

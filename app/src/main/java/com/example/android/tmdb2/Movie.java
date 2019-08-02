@@ -11,7 +11,7 @@ public class Movie {
     @SerializedName("page")
     private Long mPage;
     @SerializedName("results")
-    private ArrayList<Result> mResults;
+    private ArrayList<MovieResult> mResults;
     @SerializedName("total_pages")
     private Long mTotalPages;
     @SerializedName("total_results")
@@ -33,11 +33,11 @@ public class Movie {
         mPage = page;
     }
 
-    public List<Result> getResults() {
+    public List<MovieResult> getResults() {
         return mResults;
     }
 
-    public void setResults(ArrayList<Result> results) {
+    public void setResults(ArrayList<MovieResult> results) {
         mResults = results;
     }
 

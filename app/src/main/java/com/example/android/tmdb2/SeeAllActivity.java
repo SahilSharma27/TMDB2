@@ -4,17 +4,14 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.Log;
 import android.view.View;
-import android.widget.AbsListView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.logging.Handler;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -24,7 +21,7 @@ public class SeeAllActivity extends AppCompatActivity {
     RecyclerView seeAllRecycler;
     CustomAdapterType2 adapter;
     ArrayList<Poster> allMovies = new ArrayList<>();
-    ArrayList<Result>allMoviesM=new ArrayList<>();
+    ArrayList<MovieResult>allMoviesM=new ArrayList<>();
     ArrayList<TVResult>allTv=new ArrayList<>();
     Intent intent;
     Boolean isScrolling = false;
@@ -53,7 +50,7 @@ public class SeeAllActivity extends AppCompatActivity {
             @Override
             public void onMovieClicked(View view, int position) {
 
-                    Result clickedMov = allMoviesM.get(position);
+                    MovieResult clickedMov = allMoviesM.get(position);
                     Bundle bundle = new Bundle();
                     Long id = clickedMov.getId();
                     bundle.putLong("id", id);

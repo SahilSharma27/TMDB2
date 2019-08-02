@@ -84,11 +84,26 @@
             android:layout_marginBottom="4dp"
             android:layout_marginTop="16dp"
             android:textSize="25sp"
-            android:text="Similar Movies"/>
+            android:text="Similar "/>
         <android.support.v7.widget.RecyclerView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/similarRecyclerView">
+        </android.support.v7.widget.RecyclerView>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#ffffff"
+            android:layout_marginStart="16dp"
+            android:layout_marginBottom="4dp"
+            android:layout_marginTop="16dp"
+            android:textSize="25sp"
+            android:text="Reviews "/>
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/reviewRecyclerView"
+            android:nestedScrollingEnabled="false">
         </android.support.v7.widget.RecyclerView>
 
 

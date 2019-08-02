@@ -60,12 +60,12 @@ public class TVFragment extends Fragment implements View.OnClickListener{
                TVResult clickedMov=oTV.getResults().get(position);
                Bundle bundle=new Bundle();
                bundle.putLong("id",clickedMov.getId());
-               bundle.putString("title",clickedMov.getOriginalName());
+               bundle.putString("title",clickedMov.getOriginalTitle());
                bundle.putString("backPst",clickedMov.getBackdropPath());
                bundle.putString("overview",clickedMov.getOverview());
                bundle.putDouble("rating",clickedMov.getVoteAverage());
                bundle.putString("poster",clickedMov.getPosterPath());
-               bundle.putString("release_date",clickedMov.getFirstAirDate());
+               bundle.putString("release_date",clickedMov.getReleaseDate());
                bundle.putString("type","tv");
                Intent intent1=new Intent(getActivity(),DetailsActivity.class);
                intent1.putExtras(bundle);
@@ -87,12 +87,12 @@ public class TVFragment extends Fragment implements View.OnClickListener{
                 TVResult clickedMov=pTV.getResults().get(position);
                 Bundle bundle=new Bundle();
                 bundle.putLong("id",clickedMov.getId());
-                bundle.putString("title",clickedMov.getOriginalName());
+                bundle.putString("title",clickedMov.getOriginalTitle());
                 bundle.putString("backPst",clickedMov.getBackdropPath());
                 bundle.putString("overview",clickedMov.getOverview());
                 bundle.putDouble("rating",clickedMov.getVoteAverage());
                 bundle.putString("poster",clickedMov.getPosterPath());
-                bundle.putString("release_date",clickedMov.getFirstAirDate());
+                bundle.putString("release_date",clickedMov.getReleaseDate());
                 bundle.putString("type","tv");
                  Intent intent1=new Intent(getActivity(),DetailsActivity.class);
                 intent1.putExtras(bundle);
@@ -112,12 +112,12 @@ public class TVFragment extends Fragment implements View.OnClickListener{
                 TVResult clickedMov=tTV.getResults().get(position);
                 Bundle bundle=new Bundle();
                 bundle.putLong("id",clickedMov.getId());
-                bundle.putString("title",clickedMov.getOriginalName());
+                bundle.putString("title",clickedMov.getOriginalTitle());
                 bundle.putString("backPst",clickedMov.getBackdropPath());
                 bundle.putString("overview",clickedMov.getOverview());
                 bundle.putDouble("rating",clickedMov.getVoteAverage());
                 bundle.putString("poster",clickedMov.getPosterPath());
-                bundle.putString("release_date",clickedMov.getFirstAirDate());
+                bundle.putString("release_date",clickedMov.getReleaseDate());
                 bundle.putString("type","tv");
                 Intent intent1=new Intent(getActivity(),DetailsActivity.class);
                 intent1.putExtras(bundle);
@@ -146,7 +146,7 @@ public class TVFragment extends Fragment implements View.OnClickListener{
                 public void onResponse(Call<TV> call, Response<TV> response) {
                     oTV = response.body();
                     for (int i = 0; i < oTV.getResults().size(); i++) {
-                        Poster newPost = new Poster(oTV.getResults().get(i).getOriginalName(), oTV.getResults().get(i).getBackdropPath());
+                        Poster newPost = new Poster(oTV.getResults().get(i).getOriginalTitle(), oTV.getResults().get(i).getBackdropPath());
                         tvOnAir.add(i, newPost);
 
                     }
@@ -168,7 +168,7 @@ public class TVFragment extends Fragment implements View.OnClickListener{
                 public void onResponse(Call<TV> call, Response<TV> response) {
                     pTV = response.body();
                     for (int i = 0; i < pTV.getResults().size(); i++) {
-                        Poster newPost = new Poster(pTV.getResults().get(i).getOriginalName(), pTV.getResults().get(i).getPosterPath());
+                        Poster newPost = new Poster(pTV.getResults().get(i).getOriginalTitle(), pTV.getResults().get(i).getPosterPath());
                         tvPopular.add(i, newPost);
 
                     }
@@ -190,7 +190,7 @@ public class TVFragment extends Fragment implements View.OnClickListener{
                 public void onResponse(Call<TV> call, Response<TV> response) {
                     tTV = response.body();
                     for (int i = 0; i < tTV.getResults().size(); i++) {
-                        Poster newPost = new Poster(tTV.getResults().get(i).getOriginalName(), tTV.getResults().get(i).getPosterPath());
+                        Poster newPost = new Poster(tTV.getResults().get(i).getOriginalTitle(), tTV.getResults().get(i).getPosterPath());
                         tvTopRated.add(i, newPost);
 
                     }

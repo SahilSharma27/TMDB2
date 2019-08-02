@@ -9,7 +9,7 @@ public class TVResult {
     @SerializedName("backdrop_path")
     private String mBackdropPath;
     @SerializedName("first_air_date")
-    private String mFirstAirDate;
+    private String mReleaseDate;
     @SerializedName("genre_ids")
     private List<Long> mGenreIds;
     @SerializedName("id")
@@ -21,7 +21,7 @@ public class TVResult {
     @SerializedName("original_language")
     private String mOriginalLanguage;
     @SerializedName("original_name")
-    private String mOriginalName;
+    private String mOriginalTitle;
     @SerializedName("overview")
     private String mOverview;
     @SerializedName("popularity")
@@ -41,12 +41,12 @@ public class TVResult {
         mBackdropPath = backdropPath;
     }
 
-    public String getFirstAirDate() {
-        return mFirstAirDate;
+    public String getReleaseDate() {
+        return mReleaseDate;
     }
 
-    public void setFirstAirDate(String firstAirDate) {
-        mFirstAirDate = firstAirDate;
+    public void setReleaseDate(String firstAirDate) {
+        mReleaseDate = firstAirDate;
     }
 
     public List<Long> getGenreIds() {
@@ -89,12 +89,12 @@ public class TVResult {
         mOriginalLanguage = originalLanguage;
     }
 
-    public String getOriginalName() {
-        return mOriginalName;
+    public String getOriginalTitle() {
+        return mOriginalTitle;
     }
 
-    public void setOriginalName(String originalName) {
-        mOriginalName = originalName;
+    public void setOriginalTitle(String originalName) {
+        mOriginalTitle = originalName;
     }
 
     public String getOverview() {

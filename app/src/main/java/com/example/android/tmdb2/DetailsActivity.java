@@ -1,5 +1,6 @@
 package com.example.android.tmdb2;
 
+import android.arch.persistence.room.Room;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
@@ -33,14 +34,18 @@ public class DetailsActivity extends AppCompatActivity {
     ImageView iview, iview1;
     Long movieId;
     Trailer trailer;
-    RecyclerView castRecyclerView, similarRecyclerView;
+    RecyclerView castRecyclerView, similarRecyclerView,reviewsRecycleView;
     CastAdapter adapter;
     ArrayList<Cast> cast = new ArrayList<>();
     ArrayList<Poster> similarMovie = new ArrayList<>();
     Movie sMovie;
     CustomAdapterType2 adapter2;
+    ReviewsAdapter adapter3;
     CastObject obj;
     String movieOrTv;
+    ArrayList<Result> reviews=new ArrayList<>();
+    Reviews review;
+    FavoritesDAO favoritesDAO;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +53,9 @@ public class DetailsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_details);
         castRecyclerView = findViewById(R.id.castRecyclerView);
         similarRecyclerView = findViewById(R.id.similarRecyclerView);
+        reviewsRecycleView=findViewById(R.id.reviewRecyclerView);
         ratingtextView = (TextView) findViewById(R.id.rating);
+
         iview = findViewById(R.id.iMg);
         iview1 = findViewById(R.id.Img);
         OverView = findViewById(R.id.overviewId);
@@ -60,6 +67,12 @@ public class DetailsActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Favorites favorite=new Favorites();
+                favorite.setId(movieId);
+
+                FavoritesDatabase database = Room.databaseBuilder(getApplicationContext(),FavoritesDatabase.class,"favorites_db").allowMainThreadQueries().build();
+                favoritesDAO = database.getFavoriteDao();
+                favoritesDAO.addMovieTv(favorite);
                 Snackbar.make(view, "Added to favourites.", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
@@ -123,6 +136,19 @@ public class DetailsActivity extends AppCompatActivity {
         LinearLayoutManager linearLayoutManager1 = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         similarRecyclerView.setLayoutManager(linearLayoutManager1);
         fetchData(1);
+
+        adapter3=new ReviewsAdapter(this, reviews, new reviewClickListener() {
+            @Override
+            public void onMovieClicked(View view, int position) {
+                //todo;
+            }
+        });
+        reviewsRecycleView.setAdapter(adapter3);
+        reviewsRecycleView.setItemAnimator(new DefaultItemAnimator());
+        LinearLayoutManager linearLayoutManager2=new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false);
+        reviewsRecycleView.setLayoutManager(linearLayoutManager2);
+        fetchData(2);
+
     }
 
     public void openTrailer() {
@@ -194,6 +220,29 @@ public class DetailsActivity extends AppCompatActivity {
                 }
             });
 
+
+        }
+        else if(code==2){
+            int id=movieId.intValue();
+            Call<Reviews> call=ApiClient.getMovieTVServices().getReviews(movieOrTv,id);
+            call.enqueue(new Callback<Reviews>() {
+                @Override
+                public void onResponse(Call<Reviews> call, Response<Reviews> response) {
+                    review=response.body();
+
+                    reviews.addAll(review.getResults());
+//                    for(int i=0;i<review.getResults().size();i++){
+//                        Result result=review.getResults().get(i);
+//                        reviews.add(result);
+//                    }
+                    adapter3.notifyDataSetChanged();
+                }
+
+                @Override
+                public void onFailure(Call<Reviews> call, Throwable t) {
+
+                }
+            });
 
         }
 

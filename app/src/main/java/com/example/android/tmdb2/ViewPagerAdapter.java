@@ -11,13 +11,11 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-        if(position == 0){
-            return new HomeFragment();
-        }
-        else if(position == 1){
+
+         if(position == 0){
             return new MoviesFragment();
         }
-        else if(position == 2){
+        else if(position == 1){
             return new TVFragment();
         }
         return null;
@@ -26,6 +24,6 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public int getCount() {
-        return 3;
+        return 2;
     }
 }
