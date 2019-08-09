@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -52,6 +53,7 @@ public class MoviesFAVFragment extends Fragment {
             public void onMovieClicked(View view, int position) {
                 Favorites f=fav.get(position);
                 favoritesDAO.deleteMovieTv(f);
+                favMovies.remove(position);
                 adapter.notifyDataSetChanged();
 
             }
@@ -67,6 +69,7 @@ public class MoviesFAVFragment extends Fragment {
         favoritesDAO = database.getFavoriteDao();
 
         fav = favoritesDAO.getFavorites();
+        Toast.makeText(getContext(), " " + fav.size(), Toast.LENGTH_LONG).show();
         if (fav.size() == 0) {
             //todo
             }

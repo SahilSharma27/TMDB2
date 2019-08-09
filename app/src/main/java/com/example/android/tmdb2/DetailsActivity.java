@@ -54,19 +54,20 @@ public class DetailsActivity extends AppCompatActivity {
         castRecyclerView = findViewById(R.id.castRecyclerView);
         similarRecyclerView = findViewById(R.id.similarRecyclerView);
         reviewsRecycleView=findViewById(R.id.reviewRecyclerView);
-        ratingtextView = (TextView) findViewById(R.id.rating);
+        ratingtextView = findViewById(R.id.rating);
 
         iview = findViewById(R.id.iMg);
         iview1 = findViewById(R.id.Img);
         OverView = findViewById(R.id.overviewId);
         DateView = findViewById(R.id.date);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        final FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                fab.setImageResource(R.drawable.ic_favorite_black_24dp);
                 Favorites favorite=new Favorites();
                 favorite.setId(movieId);
 
@@ -77,8 +78,8 @@ public class DetailsActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
-        fab.setImageResource(R.drawable.ic_favorite_black_24dp);
-        FloatingActionButton fab1 = (FloatingActionButton) findViewById(R.id.fab1);
+
+        FloatingActionButton fab1 = findViewById(R.id.fab1);
         fab1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

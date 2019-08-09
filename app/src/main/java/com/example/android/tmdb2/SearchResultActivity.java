@@ -25,6 +25,7 @@ public class SearchResultActivity extends AppCompatActivity {
     String query;
     Search obj;
     TextView textView;
+    Intent intent1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
